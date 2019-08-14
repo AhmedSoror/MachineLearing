@@ -1,0 +1,5 @@
+how to run:
+
+1) addingFeaturesNames : to add headers and convert data to csv files ( if data is .csv skip )
+2) sessionProcessing : get a csv file for every student with session data
+3) sessionAverage : get average per session to complete missing data
