@@ -4,8 +4,8 @@
 ### Python ###
 
 # folders
-Data/Processed/
-Data/SessionsCollapsed/
+Data/
+Data_Processed/
 
 
 # Byte-compiled / optimized / DLL files

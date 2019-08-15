@@ -1,24 +1,34 @@
 import os
 
-
-def line_prepender(filename, line):
-    with open(filename, 'r+') as f:
-        content = f.read()
-        f.seek(0, 0)
-        f.write(line.rstrip('\r\n') + '\n' + content)
+# ---------------------------------------------- Constants ----------------------------------------------
+sessions_in_parent = "Data/Processes"
+features_string = "session_id,student_id,exercise,activity,start_time,end_time,idle_time,mouse_wheel,mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke"
+sessions_csv_parent = "Data_Processed/Processes"
 
 
-def add_features(data_source, line):
-    for session in os.listdir(data_source):
-        for student in os.listdir(f'{data_source}/{session}'):
-            path = f'{data_source}/{session}/{student}'
-            line_prepender(path, line)
-            base = os.path.splitext(path)[0]
-            os.rename(path, base + '.csv')
+# ---------------------------------------------- Methods ----------------------------------------------
+
+
+def insert_top(original_file, new_file, line):
+    with open(original_file, 'r') as f:
+        with open(new_file, 'w') as f2:
+            f2.write(line+"\n")
+            f2.write(f.read())
+
+
+def add_features():
+    for session in os.listdir(sessions_in_parent):
+        for student in os.listdir(f'{sessions_in_parent}/{session}'):
+            in_path = f'{sessions_in_parent}/{session}/{student}'
+            out_path = f'{sessions_csv_parent}/{session}/{student}.csv'
+            if not os.path.exists(f'{sessions_csv_parent}/{session}'):
+                os.makedirs(f'{sessions_csv_parent}/{session}')
+            insert_top(in_path, out_path, features_string)
     print("Process Completed")
 
 
-features_string = "session,student_Id,exercise,activity,start_time,end_time,idle_time,mouse_wheel,mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke"
+# ---------------------------------------------- Main ----------------------------------------------
 
-add_features('Data/Processes', features_string)
+
+add_features()
 

@@ -5,8 +5,21 @@ import os
 from operator import itemgetter
 import openpyxl as xl
 
-
+# ---------------------------------------------- Constants ----------------------------------------------
 sessions_max_grades = [5, 6, 4, 5, 4, 4]
+sessions_in_parent = "Data_Processed/Processes"
+log_csv_parent = "Data_Processed"
+log_csv_path = "Data_Processed/logs.csv"
+log_txt_path = "Data/logs.txt"
+intermediate_grades_xlsx = "Data/intermediate_grades.xlsx"
+data_processed_students = "Data_Processed/Students"
+
+# ---------------------------------------------- init ----------------------------------------------
+
+
+def init():
+    if not os.path.exists(data_processed_students):
+        os.makedirs(data_processed_students)
 
 # ---------------------------------------------- I/O ----------------------------------------------
 
@@ -15,7 +28,7 @@ def log_to_csv(filename):
     with open(filename, 'r') as in_file:
         stripped = (line.strip() for line in in_file)
         lines = (line.split("\t") for line in stripped if line)
-        with open(f'Data/logs.csv', 'w') as out_file:
+        with open(log_csv_path, 'w') as out_file:
             writer = csv.writer(out_file)
             writer.writerows(lines)
 
@@ -32,11 +45,11 @@ def file_write(filename, my_data):
 
 def get_all_students(log_file):
     log_data = pd.read_csv(log_file)
-    return list(log_data.Student_Id)
+    return list(log_data["Student Id"])
 
 
-def get_student_log(log_file, student_id):
-    with open(log_file, 'r') as f:
+def get_student_log(student_id):
+    with open(log_csv_path, 'r') as f:
         reader = csv.reader(f)
         your_list = list(reader)
     x = your_list[student_id]
@@ -44,7 +57,7 @@ def get_student_log(log_file, student_id):
 
 
 def get_session_data(session_sheet, student_id):
-    session_id = session_sheet['session'][0]
+    session_id = session_sheet['session_id'][0]
     activity = handle_mode_not_unique(list(session_sheet.activity))
     try:
         activity = statistics.mode(session_sheet['activity'])
@@ -70,7 +83,7 @@ def get_session_data(session_sheet, student_id):
     mouse_click_right_rate = total_mouse_click_right  #/ (total_time - total_idle_time)
     mouse_movement_rate = total_mouse_movement # / (total_time - total_idle_time)
     keystroke_rate = total_keystroke  #/ (total_time - total_idle_time)
-    intermediate_grades_file = xl.load_workbook('Data/intermediate_grades.xlsx')
+    intermediate_grades_file = xl.load_workbook(intermediate_grades_xlsx)
     session_grade = get_intermediate_grade(intermediate_grades_file, student_id, session_id)
     # -----------------
     data = [session_id, activity, st_time, end_time, total_idle_time, mouse_wheel_rate,
@@ -104,16 +117,16 @@ def handle_mode_not_unique(data_list):
 # ------------------------------------------- Logic Methods ---------------------------------------------
 
 
-def process_student_sessions(student_id, data_source):
-    filtered_features = [["session_id", "activity", "st_time", "end_time", "total_idle_time", "mouse_wheel_rate",
+def process_student_sessions(student_id):
+    filtered_features = [["session_id", "activity", "start_time", "end_time", "total_idle_time", "mouse_wheel_rate",
                           "mouse_wheel_click_rate", "mouse_click_left_rate", "mouse_click_right_rate",
                           "mouse_movement_rate", "keystroke_rate", "intermediate_grade"]
                          ]
 
     # get the student log in all sessions to handle session absence
-    student_session_log = get_student_log('Data/logs.csv', student_id)
+    student_session_log = get_student_log(student_id)
 
-    for session in os.listdir(data_source):
+    for session in os.listdir(sessions_in_parent):
         print(f'Started processing {session}')
         session_number = int(session.split(" ")[1])
 
@@ -121,7 +134,7 @@ def process_student_sessions(student_id, data_source):
             handle_session_absence(session_number)
         else:
             try:
-                my_file = f'{data_source}/{session}/{student_id}.csv'
+                my_file = f'{sessions_in_parent}/{session}/{student_id}.csv'
                 session_data = pd.read_csv(my_file)
                 session_row = get_session_data(session_data, student_id)
                 filtered_features.append(session_row)
@@ -130,20 +143,17 @@ def process_student_sessions(student_id, data_source):
                 handle_session_absence(session_number)
         print("")
 
-    file = f"Data/Processed/{student_id}.csv"
-    if not os.path.exists("Data/Processed"):
-        os.makedirs("Data/Processed")
+    file = f"{data_processed_students}/{student_id}.csv"
     file_write(file, filtered_features)
 
 
 # ------------------------------------------- Main ---------------------------------------------
 
+init()
+log_to_csv(log_txt_path)
 
-log_to_csv("Data/logs.txt")
-data_path = 'Data/Processes/'
-
-for student in get_all_students("Data/logs.csv"):
+for student in get_all_students(log_csv_path):
     print(f'-------------- student: {student} --------------')
-    process_student_sessions(student, data_path)
+    process_student_sessions(student)
 
 print("Process Completed")
