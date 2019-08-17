@@ -77,18 +77,20 @@ def get_session_data(session_sheet, student_id):
     total_mouse_click_right = sum(session_sheet['mouse_click_right'])
     total_mouse_movement = sum(session_sheet['mouse_movement'])
     total_keystroke = sum(session_sheet['keystroke'])
-    mouse_wheel_rate = total_mouse_wheel  #/ (total_time - total_idle_time)
-    mouse_wheel_click_rate = total_mouse_wheel_click  #/ (total_time - total_idle_time)
-    mouse_click_left_rate = total_mouse_click_left  #/ (total_time - total_idle_time)
-    mouse_click_right_rate = total_mouse_click_right  #/ (total_time - total_idle_time)
-    mouse_movement_rate = total_mouse_movement # / (total_time - total_idle_time)
-    keystroke_rate = total_keystroke  #/ (total_time - total_idle_time)
+
+    # mouse_wheel_rate = total_mouse_wheel/(total_time - total_idle_time)
+    # mouse_wheel_click_rate = total_mouse_wheel_click / (total_time - total_idle_time)
+    # mouse_click_left_rate = total_mouse_click_left  / (total_time - total_idle_time)
+    # mouse_click_right_rate = total_mouse_click_right  / (total_time - total_idle_time)
+    # mouse_movement_rate = total_mouse_movement / (total_time - total_idle_time)
+    # keystroke_rate = total_keystroke  / (total_time - total_idle_time)
+
     intermediate_grades_file = xl.load_workbook(intermediate_grades_xlsx)
     session_grade = get_intermediate_grade(intermediate_grades_file, student_id, session_id)
     # -----------------
-    data = [session_id, activity, st_time, end_time, total_idle_time, mouse_wheel_rate,
-            mouse_wheel_click_rate, mouse_click_left_rate, mouse_click_right_rate, mouse_movement_rate,
-            keystroke_rate, session_grade]
+    data = [session_id, activity, st_time, end_time, total_idle_time, total_mouse_wheel,
+            total_mouse_wheel_click, total_mouse_click_left, total_mouse_click_right, total_mouse_movement,
+            total_keystroke, session_grade]
     return data
 
 
@@ -118,9 +120,9 @@ def handle_mode_not_unique(data_list):
 
 
 def process_student_sessions(student_id):
-    filtered_features = [["session_id", "activity", "start_time", "end_time", "total_idle_time", "mouse_wheel_rate",
-                          "mouse_wheel_click_rate", "mouse_click_left_rate", "mouse_click_right_rate",
-                          "mouse_movement_rate", "keystroke_rate", "intermediate_grade"]
+    filtered_features = [["session_id", "activity", "start_time", "end_time", "total_idle_time", "mouse_wheel",
+                          "mouse_wheel_click", "mouse_click_left", "mouse_click_right",
+                          "mouse_movement", "keystroke", "intermediate_grade"]
                          ]
 
     # get the student log in all sessions to handle session absence
@@ -147,13 +149,17 @@ def process_student_sessions(student_id):
     file_write(file, filtered_features)
 
 
-# ------------------------------------------- Main ---------------------------------------------
+# ------------------------------------------- Run ---------------------------------------------
+def run():
+    init()
+    log_to_csv(log_txt_path)
 
-init()
-log_to_csv(log_txt_path)
+    for student in get_all_students(log_csv_path):
+        print(f'-------------- student: {student} --------------')
+        process_student_sessions(student)
 
-for student in get_all_students(log_csv_path):
-    print(f'-------------- student: {student} --------------')
-    process_student_sessions(student)
+    print("Process Completed")
 
-print("Process Completed")
+
+# run()
+
