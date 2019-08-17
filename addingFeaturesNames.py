@@ -25,7 +25,7 @@ def add_features():
             if not os.path.exists(f'{sessions_csv_parent}/{session}'):
                 os.makedirs(f'{sessions_csv_parent}/{session}')
             insert_top(in_path, out_path, features_string)
-    print("Process Completed")
+    # print("Process Completed")
 
 
 # ---------------------------------------------- Main ----------------------------------------------

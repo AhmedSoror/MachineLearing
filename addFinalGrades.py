@@ -156,6 +156,3 @@ def run():
 
 
 run()
-
-# print( get_student_ids())
-# print(find_student_final_grade(106))

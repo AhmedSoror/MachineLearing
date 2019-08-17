@@ -42,7 +42,7 @@ def write_csv_file(filename, my_data):
     with my_file:
         writer = csv.writer(my_file)
         writer.writerows(my_data)
-    print("Writing file complete")
+    # print("Writing file complete")
 
 
 def add_sorted_rows(filename, my_data, col_name):
@@ -55,7 +55,7 @@ def add_rows_to_csv(filename, my_data):
     with my_file:
         writer = csv.writer(my_file)
         writer.writerows(my_data)
-    print("Writing file complete")
+    # print("Writing file complete")
 
 
 def sort_csv(file_path,col_name):

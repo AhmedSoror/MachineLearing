@@ -94,7 +94,8 @@ def get_intermediate_grade(intermediate_grades, student_id, session_id):
 # --------------------------------------------- Handlers  ---------------------------------------------
 
 def handle_session_absence(session_number):
-    print(f"student was absent in session {session_number}")
+    pass
+    # print(f"student was absent in session {session_number}")
 
 # ------------------------------------------- Logic Methods ---------------------------------------------
 
@@ -109,7 +110,7 @@ def process_student_sessions(student_id):
     student_session_log = get_student_log(student_id)
 
     for session in os.listdir(sessions_in_parent):
-        print(f'Started processing {session}')
+        # print(f'Started processing {session}')
         session_number = int(session.split(" ")[1])
 
         if student_session_log[session_number] == '0':
@@ -121,9 +122,9 @@ def process_student_sessions(student_id):
                 session_row = get_session_data(session_data, student_id)
                 filtered_features.append(session_row)
             except FileNotFoundError as e:
-                print(f'wrong data in log file: {student_session_log} in session {session_number}')
+                # print(f'wrong data in log file: {student_session_log} in session {session_number}')
                 handle_session_absence(session_number)
-        print("")
+        # print("")
 
     file = f"{data_processed_students}/{student_id}.csv"
     write_csv_file(file, filtered_features)
@@ -135,10 +136,10 @@ def run():
     log_to_csv(log_txt_path)
 
     for student in get_all_students(log_csv_path):
-        print(f'-------------- student: {student} --------------')
+        # print(f'-------------- student: {student} --------------')
         process_student_sessions(student)
 
-    print("Process Completed")
+    # print("Process Completed")
 
 
 run()
