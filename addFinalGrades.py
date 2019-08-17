@@ -5,7 +5,7 @@ import openpyxl as xl
 import xlrd
 from statistics import mean
 
-# ------------------------------------ constants --------------------------------------------
+# -------------------------------- Constants & Global Variables ----------------------------------------
 
 final_grades_xlsx = "Data/final_grades.xlsx"
 data_processed_students = "Data_Processed/Students"
@@ -20,9 +20,10 @@ sheet2_pandas = pd.read_excel(final_grades_xlsx, index_col=0, sheet_name=sheet2)
 
 sessions_boundaries = []
 average_grades = []
-sheet1_pointer = 0
-sheet2_pointer = 0
-# ------------------------------------ init --------------------------------------------
+sheet1_pointer = 1                                         # starts from 1
+sheet2_pointer = 1
+
+# ------------------------------------ init & helpers --------------------------------------------
 
 
 def init():
@@ -49,6 +50,15 @@ def get_session_boundaries(sheet, columns):
 
     sessions_limits.append(session_end + 1)
     return sessions_limits
+
+
+def get_student_ids():
+    student_ids_list = []
+    for student in os.listdir(data_processed_students):
+        student_id = int(student.split(".")[0])
+        student_ids_list.append(student_id)
+    student_ids_list.sort()
+    return student_ids_list
 # ------------------------------------- average -------------------------------------
 
 
@@ -69,7 +79,7 @@ def get_average_grades_helper(df):
             sum_temp += x[i]
         else:
             grade_percent = sum_temp / final_grades_max[session-1]
-            grades.append(round(grade_percent, 2))
+            grades.append(round(grade_percent, 4))
             sum_temp = x[i]
             session += 1
     return grades
@@ -78,7 +88,7 @@ def get_average_grades_helper(df):
 # ------------------------------------- Final Grade -------------------------------------
 
 
-def get_grades(sheet, row_number):
+def get_grade_by_row(sheet, row_number):
     columns = sheet.ncols
     grades = []
     session = 1
@@ -89,15 +99,15 @@ def get_grades(sheet, row_number):
             sum_temp += float(x)
         else:
             grade_percent = sum_temp / final_grades_max[session-1]
-            grades.append(grade_percent)
+            grades.append(round(grade_percent, 4))
             sum_temp = float(x)
             session += 1
     grade_percent = sum_temp / final_grades_max[session-1]
-    grades.append(grade_percent)
+    grades.append(round(grade_percent, 4))
     return grades
 
 
-def find_final_grades(student_id):
+def find_student_final_grade(student_id):
     global sheet1_pointer
     global sheet2_pointer
 
@@ -105,13 +115,13 @@ def find_final_grades(student_id):
     first_time_sheet = wb.sheet_by_index(0)
     second_time_sheet = wb.sheet_by_index(1)
     if first_time_sheet.cell_value(sheet1_pointer, 0) == student_id:
-        result[0] = get_grades(first_time_sheet, sheet1_pointer)
+        result[0] = get_grade_by_row(first_time_sheet, sheet1_pointer)
         sheet1_pointer += 1
     else:
         result[0] = average_grades[0]
 
     if second_time_sheet.cell_value(sheet2_pointer, 0) == student_id:
-        result[1] = get_grades(second_time_sheet, sheet2_pointer)
+        result[1] = get_grade_by_row(second_time_sheet, sheet2_pointer)
         sheet2_pointer += 1
     else:
         result[1] = average_grades[1]
@@ -119,31 +129,23 @@ def find_final_grades(student_id):
     return result
 
 
-def get_student_ids():
-    student_ids_list = []
-    for student in os.listdir(data_processed_students):
-        student_id = int(student.split(".")[0])
-        student_ids_list.append(student_id)
-    student_ids_list.sort()
-    return student_ids_list
-
-
 def get_all_students_grades():
-    students_final_grades = []
     student_ids_list = get_student_ids()
     for student in student_ids_list:
-        student_grade = find_final_grades(student)
-        students_final_grades.append(student_grade)
-    return students_final_grades
+        student_grade = find_student_final_grade(student)
+        csv_input = pd.read_csv(f'{data_processed_students}/{student}.csv')
+        print(student_grade[0])
+        csv_input['first_exam'] = student_grade[0]
+        csv_input['second_exam'] = student_grade[1]
+        csv_input.to_csv(f'{data_processed_students}/{student}.csv', index=False)
+
 
 # ------------------------------------- Main -------------------------------------
 
 
 def run():
     init()
-    x = get_all_students_grades()
-    # x = find_final_grades(1)
-    # print(x)
+    get_all_students_grades()
 
 
 run()
