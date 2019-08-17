@@ -17,7 +17,7 @@ log_csv_parent = "Data_Processed"
 log_txt_path = "Data/logs.txt"
 intermediate_grades_xlsx = "Data/intermediate_grades.xlsx"
 features_string = "session_id,student_id,exercise,activity,start_time,end_time,idle_time,mouse_wheel," \
-                  "mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke "
+                  "mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke"
 sessions_csv_parent = "Data_Processed/Processes"
 sessions_max_grades = [5, 6, 4, 5, 4, 4]
 final_grades_max = [5, 5, 10, 25, 15, 40]
@@ -89,9 +89,9 @@ def get_session_from_student(source_path, output_path, student_id):
             fd.write(line)
 
 
-def collapse_sessions():
+def collapse_sessions(output_path):
     for current_student_id in range(1, 116):
         try:
-            get_session_from_student(data_processed_students, sessions_collapsed, current_student_id)
+            get_session_from_student(data_processed_students, output_path, current_student_id)
         except FileNotFoundError:
             print(f'no processed file found for student {current_student_id}')

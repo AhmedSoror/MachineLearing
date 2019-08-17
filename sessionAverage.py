@@ -21,7 +21,7 @@ def init():
     if not os.path.exists(sessions_collapsed):
         os.makedirs(sessions_collapsed)
     header = "student_id,session_id,activity,start_time,end_time,total_idle_time,mouse_wheel,mouse_wheel_click," \
-             "mouse_click_left,mouse_click_right,mouse_movement,keystroke,intermediate_grade "
+             "mouse_click_left,mouse_click_right,mouse_movement,keystroke,intermediate_grade"
 
     for i in range(1, 7):
         with open(f'{sessions_collapsed}/session {i}.csv', 'w+') as fd:
@@ -104,7 +104,7 @@ def add_session_averages_to_students():
 
 def run():
     init()
-    collapse_sessions()
+    collapse_sessions(sessions_collapsed)
     add_session_averages_to_students()
 
 

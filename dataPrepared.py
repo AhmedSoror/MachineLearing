@@ -17,7 +17,7 @@ def init():
 
 def run():
     init()
-    collapse_sessions()
+    collapse_sessions(sessions_output_path)
 
 
 run()
