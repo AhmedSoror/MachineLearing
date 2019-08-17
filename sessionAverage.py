@@ -8,6 +8,7 @@ import openpyxl as xl
 
 # ---------------------------------------------- Import from Common File ----------------------------------------------
 from commonMethods import file_write
+from commonMethods import handle_mode_not_unique
 
 from commonMethods import sessions_in_parent
 from commonMethods import sessions_collapsed
@@ -57,9 +58,6 @@ def collapse_sessions():
 
 
 # --------------------------------------------- Handlers  ---------------------------------------------
-
-
-
 
 
 def get_average_session_data(session_id):

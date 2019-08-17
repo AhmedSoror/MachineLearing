@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ea2ae16-9987-4bdf-a380-c95e32b96645" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/commonMethods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addFinalGrades.py" beforeDir="false" afterPath="$PROJECT_DIR$/addFinalGrades.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addingFeaturesNames.py" beforeDir="false" afterPath="$PROJECT_DIR$/addingFeaturesNames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sessionAverage.py" beforeDir="false" afterPath="$PROJECT_DIR$/sessionAverage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sessionProcessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/sessionProcessing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +168,7 @@
       <workItem from="1565829518914" duration="5247000" />
       <workItem from="1565965143924" duration="8680000" />
       <workItem from="1565991187029" duration="3326000" />
-      <workItem from="1566052968666" duration="6311000" />
+      <workItem from="1566052968666" duration="6531000" />
     </task>
     <task id="LOCAL-00001" summary="Getting final grades and average final grades">
       <created>1566053516706</created>
@@ -197,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566056769509</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Organizing the code">
+      <created>1566059422207</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1566059422207</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +220,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Getting final grades and average final grades" />
     <MESSAGE value="Getting final grades and average final grades Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Getting final grades and average final grades Done" />
+    <MESSAGE value="Organizing the code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Organizing the code" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/dataPreprocessing$app.coverage" NAME="app Coverage Results" MODIFIED="1565741518532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
