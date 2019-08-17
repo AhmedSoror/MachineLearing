@@ -37,12 +37,31 @@ def get_student_ids():
     return student_ids_list
 
 
-def file_write(filename, my_data):
-    my_file = open(filename, 'w')
+def write_csv_file(filename, my_data):
+    my_file = open(filename, 'w+')
     with my_file:
         writer = csv.writer(my_file)
         writer.writerows(my_data)
     print("Writing file complete")
+
+
+def add_sorted_rows(filename, my_data, col_name):
+    add_rows_to_csv(filename, my_data)
+    sort_csv(filename, col_name)
+
+
+def add_rows_to_csv(filename, my_data):
+    my_file = open(filename, 'a+')
+    with my_file:
+        writer = csv.writer(my_file)
+        writer.writerows(my_data)
+    print("Writing file complete")
+
+
+def sort_csv(file_path,col_name):
+    df = pd.read_csv(file_path)
+    df = df.sort_values(by=[f'{col_name}'])
+    df.to_csv(file_path, index=False)
 
 
 def handle_mode_not_unique(data_list):
@@ -51,3 +70,12 @@ def handle_mode_not_unique(data_list):
     maximum = lst_count[0][1]
     lst_count = [x for x in set(data_list) if data_list.count(x) >= maximum]
     return lst_count[0]
+
+
+def get_student_log(student_id):
+    with open(log_csv_path, 'r') as f:
+        reader = csv.reader(f)
+        your_list = list(reader)
+
+    return your_list[student_id]
+

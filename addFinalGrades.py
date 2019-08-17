@@ -109,16 +109,23 @@ def find_student_final_grade(student_id):
     result = [[], []]
     first_time_sheet = wb.sheet_by_index(0)
     second_time_sheet = wb.sheet_by_index(1)
-    if first_time_sheet.cell_value(sheet1_pointer, 0) == student_id:
-        result[0] = get_grade_by_row(first_time_sheet, sheet1_pointer)
-        sheet1_pointer += 1
-    else:
+
+    try:
+        if first_time_sheet.cell_value(sheet1_pointer, 0) == student_id:
+            result[0] = get_grade_by_row(first_time_sheet, sheet1_pointer)
+            sheet1_pointer += 1
+        else:
+            result[0] = average_grades[0]
+    except IndexError:
         result[0] = average_grades[0]
 
-    if second_time_sheet.cell_value(sheet2_pointer, 0) == student_id:
-        result[1] = get_grade_by_row(second_time_sheet, sheet2_pointer)
-        sheet2_pointer += 1
-    else:
+    try:
+        if second_time_sheet.cell_value(sheet2_pointer, 0) == student_id:
+            result[1] = get_grade_by_row(second_time_sheet, sheet2_pointer)
+            sheet2_pointer += 1
+        else:
+            result[1] = average_grades[1]
+    except IndexError:
         result[1] = average_grades[1]
 
     return result
@@ -128,11 +135,16 @@ def get_all_students_grades():
     student_ids_list = get_student_ids()
     for student in student_ids_list:
         student_grade = find_student_final_grade(student)
-        csv_input = pd.read_csv(f'{data_processed_students}/{student}.csv')
-        print(student_grade[0])
-        csv_input['first_exam'] = student_grade[0]
-        csv_input['second_exam'] = student_grade[1]
-        csv_input.to_csv(f'{data_processed_students}/{student}.csv', index=False)
+        file_path = f'{data_processed_students}/{student}.csv'
+        write_files(file_path, student_grade[0], student_grade[1])
+# ------------------------ write file ----------------------
+
+
+def write_files(file_path, first_exam, second_exam):
+    csv_input = pd.read_csv(file_path)
+    csv_input['first_exam'] = first_exam
+    csv_input['second_exam'] = second_exam
+    csv_input.to_csv(file_path, index=False)
 
 
 # ------------------------------------- Main -------------------------------------
@@ -143,4 +155,7 @@ def run():
     get_all_students_grades()
 
 
-# run()
+run()
+
+# print( get_student_ids())
+# print(find_student_final_grade(106))

@@ -1,6 +1,11 @@
+log file has error :  student 62 didn't attend session 3 ( found 1 in the log) so flip it to 0 before start
+
 how to run:
                         ( uncomment last line from any file to run it )
 1) addingFeaturesNames : to add headers and convert data to csv files ( if data is .csv skip )
-2) sessionProcessing : get a csv file for every student with session data
+2) getSessionsPerStudent : get a csv file for every student with session data
 3) sessionAverage : get average per session to complete missing data
 4) addFinalGrades : add final grade per session for each student.csv file in the processed data folder
+
+
+Now all data are ready to model (in "Data_Processed/Students" )

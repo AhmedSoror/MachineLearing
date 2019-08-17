@@ -7,8 +7,11 @@ import openpyxl as xl
 
 
 # ---------------------------------------------- Import from Common File ----------------------------------------------
-from commonMethods import file_write
+from commonMethods import write_csv_file
+from commonMethods import add_sorted_rows
 from commonMethods import handle_mode_not_unique
+from commonMethods import get_student_log
+from commonMethods import get_student_ids
 
 from commonMethods import sessions_in_parent
 from commonMethods import sessions_collapsed
@@ -29,14 +32,6 @@ def init():
             fd.write(header+"\n")
 
 
-def get_student_log(student_id):
-    with open(log_csv_path, 'r') as f:
-        reader = csv.reader(f)
-        your_list = list(reader)
-    x = your_list[student_id]
-    return x
-
-
 def get_session_from_student(source_path, output_path, student_id):
     header_loop = True
     for line in open(f'{source_path}/{student_id}.csv', "r"):
@@ -55,9 +50,6 @@ def collapse_sessions():
             get_session_from_student(data_processed_students, sessions_collapsed, current_student_id)
         except FileNotFoundError as e:
             print(f'no processed file found for student {current_student_id}')
-
-
-# --------------------------------------------- Handlers  ---------------------------------------------
 
 
 def get_average_session_data(session_id):
@@ -104,27 +96,40 @@ def get_all_sessions_averages():
                          ]
 
     for session in os.listdir(sessions_collapsed):
-        print(f'Started processing {session}')
+        # print(f'Started processing {session}')
         session_number = int(session.split(" ")[1].split(".")[0])
         session_average = get_average_session_data(session_number)
         filtered_features.append(session_average)
 
-        print("")
-
-    # student_session_log = get_student_log(student_id)
-    # if student_session_log[session_number] == '0':
-    #     handle_session_absence(session_number)
-
+        # print("")
 
     file = sessions_average_csv
-    file_write(file, filtered_features)
+    write_csv_file(file, filtered_features)
+    return filtered_features
+
+
+def add_session_averages_to_students():
+    student_ids_list = get_student_ids()
+    filtered_features = get_all_sessions_averages()
+    for student in student_ids_list:
+        file = f'{data_processed_students}/{student}.csv'
+        # csv_input = pd.read_csv(file)
+        student_session_log = get_student_log(student)
+        for session in range(1, 7):
+            if student_session_log[session] == '0':
+                # print(filtered_features[session])
+                add_sorted_rows(file, [filtered_features[session]], "session_id")
+
+        # csv_input.to_csv(f'{data_processed_students}/{student}.csv', index=False)
 
 
 # --------------------------------------------- Main ---------------------------------------------
+
+
 def run():
     init()
     collapse_sessions()
-    get_all_sessions_averages()
+    add_session_averages_to_students()
 
 
 run()

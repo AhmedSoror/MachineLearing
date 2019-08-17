@@ -60,7 +60,7 @@ Student Id	Session 1	Session 2	Session 3	Session 4	Session 5	Session 6
 59	1	1	1	1	1	1
 60	0	0	0	1	1	1
 61	0	1	1	1	1	1
-62	1	0	1	1	0	0
+62	1	0	0	1	0	0
 63	1	1	0	1	1	1
 64	0	0	0	1	1	1
 65	0	0	0	1	1	1

@@ -7,6 +7,7 @@ import openpyxl as xl
 
 # ---------------------------------------------- Import from Common File ----------------------------------------------
 from commonMethods import handle_mode_not_unique
+from commonMethods import get_student_log
 
 
 from commonMethods import sessions_max_grades
@@ -16,7 +17,7 @@ from commonMethods import log_csv_path
 from commonMethods import log_txt_path
 from commonMethods import intermediate_grades_xlsx
 from commonMethods import data_processed_students
-from commonMethods import file_write
+from commonMethods import write_csv_file
 
 # ---------------------------------------------- init ----------------------------------------------
 
@@ -42,14 +43,6 @@ def log_to_csv(filename):
 def get_all_students(log_file):
     log_data = pd.read_csv(log_file)
     return list(log_data["Student Id"])
-
-
-def get_student_log(student_id):
-    with open(log_csv_path, 'r') as f:
-        reader = csv.reader(f)
-        your_list = list(reader)
-    x = your_list[student_id]
-    return x
 
 
 def get_session_data(session_sheet, student_id):
@@ -133,7 +126,7 @@ def process_student_sessions(student_id):
         print("")
 
     file = f"{data_processed_students}/{student_id}.csv"
-    file_write(file, filtered_features)
+    write_csv_file(file, filtered_features)
 
 
 # ------------------------------------------- Run ---------------------------------------------
@@ -148,4 +141,4 @@ def run():
     print("Process Completed")
 
 
-# run()
+run()
