@@ -1,9 +1,10 @@
 import os
 
-# ---------------------------------------------- Constants ----------------------------------------------
-sessions_in_parent = "Data/Processes"
-features_string = "session_id,student_id,exercise,activity,start_time,end_time,idle_time,mouse_wheel,mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke"
-sessions_csv_parent = "Data_Processed/Processes"
+
+# ---------------------------------------------- Import from Common File ----------------------------------------------
+from commonMethods import sessions_in_parent
+from commonMethods import features_string
+from commonMethods import sessions_csv_parent
 
 
 # ---------------------------------------------- Methods ----------------------------------------------
@@ -30,5 +31,6 @@ def add_features():
 # ---------------------------------------------- Main ----------------------------------------------
 def run():
     add_features()
+
 
 # run()

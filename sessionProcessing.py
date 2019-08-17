@@ -5,14 +5,18 @@ import os
 from operator import itemgetter
 import openpyxl as xl
 
-# ---------------------------------------------- Constants ----------------------------------------------
-sessions_max_grades = [5, 6, 4, 5, 4, 4]
-sessions_in_parent = "Data_Processed/Processes"
-log_csv_parent = "Data_Processed"
-log_csv_path = "Data_Processed/logs.csv"
-log_txt_path = "Data/logs.txt"
-intermediate_grades_xlsx = "Data/intermediate_grades.xlsx"
-data_processed_students = "Data_Processed/Students"
+# ---------------------------------------------- Import from Common File ----------------------------------------------
+from commonMethods import handle_mode_not_unique
+
+
+from commonMethods import sessions_max_grades
+from commonMethods import sessions_in_parent
+from commonMethods import log_csv_parent
+from commonMethods import log_csv_path
+from commonMethods import log_txt_path
+from commonMethods import intermediate_grades_xlsx
+from commonMethods import data_processed_students
+from commonMethods import file_write
 
 # ---------------------------------------------- init ----------------------------------------------
 
@@ -32,16 +36,8 @@ def log_to_csv(filename):
             writer = csv.writer(out_file)
             writer.writerows(lines)
 
-
-def file_write(filename, my_data):
-    my_file = open(filename, 'w')
-    with my_file:
-        writer = csv.writer(my_file)
-        writer.writerows(my_data)
-    print("Writing file complete")
-
-
 # ---------------------------------------------- Getters ----------------------------------------------
+
 
 def get_all_students(log_file):
     log_data = pd.read_csv(log_file)
@@ -107,15 +103,6 @@ def get_intermediate_grade(intermediate_grades, student_id, session_id):
 def handle_session_absence(session_number):
     print(f"student was absent in session {session_number}")
 
-
-def handle_mode_not_unique(data_list):
-    lst_count = [[x, data_list.count(x)] for x in set(data_list)]
-    lst_count = sorted(lst_count, reverse=True, key=itemgetter(1))
-    maximum = lst_count[0][1]
-    lst_count = [x for x in set(data_list) if data_list.count(x) >= maximum]
-    return lst_count[0]
-
-
 # ------------------------------------------- Logic Methods ---------------------------------------------
 
 
@@ -162,4 +149,3 @@ def run():
 
 
 # run()
-

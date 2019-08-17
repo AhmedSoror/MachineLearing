@@ -5,15 +5,17 @@ import openpyxl as xl
 import xlrd
 from statistics import mean
 
-# -------------------------------- Constants & Global Variables ----------------------------------------
 
-final_grades_xlsx = "Data/final_grades.xlsx"
-data_processed_students = "Data_Processed/Students"
+# -------------------------------- Import from Common File  ----------------------------------------
+
+from commonMethods import final_grades_xlsx
+from commonMethods import data_processed_students
+from commonMethods import final_grades_max
+
+from commonMethods import get_student_ids
+# -------------------------------- Constants & Global Variables ----------------------------------------
 sheet1 = "Exam (First time)"
 sheet2 = "Exam (Second time)"
-
-final_grades_max = [5, 5, 10, 25, 15, 40]
-
 wb = xlrd.open_workbook(final_grades_xlsx)
 sheet1_pandas = pd.read_excel(final_grades_xlsx, index_col=0, sheet_name=sheet1)
 sheet2_pandas = pd.read_excel(final_grades_xlsx, index_col=0, sheet_name=sheet2)
@@ -52,13 +54,6 @@ def get_session_boundaries(sheet, columns):
     return sessions_limits
 
 
-def get_student_ids():
-    student_ids_list = []
-    for student in os.listdir(data_processed_students):
-        student_id = int(student.split(".")[0])
-        student_ids_list.append(student_id)
-    student_ids_list.sort()
-    return student_ids_list
 # ------------------------------------- average -------------------------------------
 
 
@@ -148,5 +143,4 @@ def run():
     get_all_students_grades()
 
 
-run()
-
+# run()

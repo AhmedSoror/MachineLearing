@@ -6,14 +6,15 @@ from operator import itemgetter
 import openpyxl as xl
 
 
-# ---------------------------------------------- Constants ----------------------------------------------
-from sessionProcessing import file_write
+# ---------------------------------------------- Import from Common File ----------------------------------------------
+from commonMethods import file_write
 
-sessions_in_parent = "Data_Processed/Processes"
-sessions_collapsed = "Data_Processed/Sessions_Collapsed/"
-data_processed_students = "Data_Processed/Students"
-sessions_average_csv = "Data_Processed/sessions_average.csv"
-sessions_max_grades = [5, 6, 4, 5, 4, 4]
+from commonMethods import sessions_in_parent
+from commonMethods import sessions_collapsed
+from commonMethods import data_processed_students
+from commonMethods import sessions_average_csv
+from commonMethods import log_csv_path
+from commonMethods import sessions_max_grades
 # ---------------------------------------------- init ----------------------------------------------
 
 
@@ -25,6 +26,14 @@ def init():
     for i in range(1, 7):
         with open(f'{sessions_collapsed}/session {i}.csv', 'w+') as fd:
             fd.write(header+"\n")
+
+
+def get_student_log(student_id):
+    with open(log_csv_path, 'r') as f:
+        reader = csv.reader(f)
+        your_list = list(reader)
+    x = your_list[student_id]
+    return x
 
 
 def get_session_from_student(source_path, output_path, student_id):
@@ -50,12 +59,7 @@ def collapse_sessions():
 # --------------------------------------------- Handlers  ---------------------------------------------
 
 
-def handle_mode_not_unique(data_list):
-    lst_count = [[x, data_list.count(x)] for x in set(data_list)]
-    lst_count = sorted(lst_count, reverse=True, key=itemgetter(1))
-    maximum = lst_count[0][1]
-    lst_count = [x for x in set(data_list) if data_list.count(x) >= maximum]
-    return lst_count[0]
+
 
 
 def get_average_session_data(session_id):
@@ -108,6 +112,11 @@ def get_all_sessions_averages():
         filtered_features.append(session_average)
 
         print("")
+
+    # student_session_log = get_student_log(student_id)
+    # if student_session_log[session_number] == '0':
+    #     handle_session_absence(session_number)
+
 
     file = sessions_average_csv
     file_write(file, filtered_features)
