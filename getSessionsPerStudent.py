@@ -2,7 +2,6 @@ import pandas as pd
 import statistics
 import csv
 import os
-from operator import itemgetter
 import openpyxl as xl
 
 # ---------------------------------------------- Import from Common File ----------------------------------------------
@@ -12,7 +11,6 @@ from commonMethods import get_student_log
 
 from commonMethods import sessions_max_grades
 from commonMethods import sessions_in_parent
-from commonMethods import log_csv_parent
 from commonMethods import log_csv_path
 from commonMethods import log_txt_path
 from commonMethods import intermediate_grades_xlsx
@@ -47,18 +45,17 @@ def get_all_students(log_file):
 
 def get_session_data(session_sheet, student_id):
     session_id = session_sheet['session_id'][0]
-    activity = handle_mode_not_unique(list(session_sheet.activity))
     try:
         activity = statistics.mode(session_sheet['activity'])
-    except statistics.StatisticsError as e:
+    except statistics.StatisticsError:
         activity = handle_mode_not_unique(list(session_sheet.activity))
         # print(f'Handled no unique mode in session{session_id}')
     # ------- Getting all variables -------
     st_time = min(session_sheet['start_time'])
     end_time = max(session_sheet['end_time'])
-    t1 = pd.to_datetime(st_time)
-    t2 = pd.to_datetime(end_time)
-    total_time = pd.Timedelta(t2 - t1).seconds / 60.0  # in minutes
+    # t1 = pd.to_datetime(st_time)
+    # t2 = pd.to_datetime(end_time)
+    # total_time = pd.Timedelta(t2 - t1).seconds / 60.0  # in minutes
     total_idle_time = sum(session_sheet['idle_time']) / 60000.0  # in minutes
     total_mouse_wheel = sum(session_sheet['mouse_wheel'])
     total_mouse_wheel_click = sum(session_sheet['mouse_wheel_click'])
@@ -93,9 +90,6 @@ def get_intermediate_grade(intermediate_grades, student_id, session_id):
 
 # --------------------------------------------- Handlers  ---------------------------------------------
 
-def handle_session_absence(session_number):
-    pass
-    # print(f"student was absent in session {session_number}")
 
 # ------------------------------------------- Logic Methods ---------------------------------------------
 
@@ -113,17 +107,14 @@ def process_student_sessions(student_id):
         # print(f'Started processing {session}')
         session_number = int(session.split(" ")[1])
 
-        if student_session_log[session_number] == '0':
-            handle_session_absence(session_number)
-        else:
+        if student_session_log[session_number] == '1':
             try:
                 my_file = f'{sessions_in_parent}/{session}/{student_id}.csv'
                 session_data = pd.read_csv(my_file)
                 session_row = get_session_data(session_data, student_id)
                 filtered_features.append(session_row)
-            except FileNotFoundError as e:
-                # print(f'wrong data in log file: {student_session_log} in session {session_number}')
-                handle_session_absence(session_number)
+            except FileNotFoundError:
+                print(f'wrong data in log file: {student_session_log} in session {session_number}')
         # print("")
 
     file = f"{data_processed_students}/{student_id}.csv"

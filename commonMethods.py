@@ -1,10 +1,6 @@
 import os
 import pandas as pd
 import csv
-import openpyxl as xl
-import xlrd
-from statistics import mean
-import statistics
 from operator import itemgetter
 
 
@@ -20,7 +16,8 @@ log_csv_path = "Data_Processed/logs.csv"
 log_csv_parent = "Data_Processed"
 log_txt_path = "Data/logs.txt"
 intermediate_grades_xlsx = "Data/intermediate_grades.xlsx"
-features_string = "session_id,student_id,exercise,activity,start_time,end_time,idle_time,mouse_wheel,mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke"
+features_string = "session_id,student_id,exercise,activity,start_time,end_time,idle_time,mouse_wheel," \
+                  "mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke "
 sessions_csv_parent = "Data_Processed/Processes"
 sessions_max_grades = [5, 6, 4, 5, 4, 4]
 final_grades_max = [5, 5, 10, 25, 15, 40]
@@ -58,7 +55,7 @@ def add_rows_to_csv(filename, my_data):
     # print("Writing file complete")
 
 
-def sort_csv(file_path,col_name):
+def sort_csv(file_path, col_name):
     df = pd.read_csv(file_path)
     df = df.sort_values(by=[f'{col_name}'])
     df.to_csv(file_path, index=False)
@@ -79,3 +76,22 @@ def get_student_log(student_id):
 
     return your_list[student_id]
 
+
+def get_session_from_student(source_path, output_path, student_id):
+    header_loop = True
+    for line in open(f'{source_path}/{student_id}.csv', "r"):
+        if header_loop:
+            header_loop = False
+            continue
+        session_id = line.split(",")[0]
+        line = f'{student_id}, {line}'
+        with open(f'{output_path}/session {session_id}.csv', 'a') as fd:
+            fd.write(line)
+
+
+def collapse_sessions():
+    for current_student_id in range(1, 116):
+        try:
+            get_session_from_student(data_processed_students, sessions_collapsed, current_student_id)
+        except FileNotFoundError:
+            print(f'no processed file found for student {current_student_id}')
