@@ -1,4 +1,6 @@
 import os
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
 from commonMethods import collapse_sessions
 sessions_output_path = "output"
@@ -15,9 +17,22 @@ def init():
             fd.write(header+"\n")
 
 
+
+def encode(file_path):
+    df = pd.read_csv(file_path)
+    x = df.iloc[:, :].values
+    encoder = LabelEncoder()
+    x[:, 2] = encoder.fit_transform((x[:, 2]))
+    y = pd.DataFrame(x)
+    # df.to_csv(r'test.csv', index=False)
+    df["activity"] = y[2]
+    df.to_csv(file_path, index=False)
+
+
 def run():
     init()
     collapse_sessions(sessions_output_path)
-
+    for i in range(1, 7):
+        encode(f'{sessions_output_path}/session {i}.csv')
 
 run()

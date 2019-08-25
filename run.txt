@@ -14,3 +14,5 @@ how to run:
 ---------------------------------------------------------------------------------
 
 Now all data are ready to model (in "output" )
+
+run files from predictions ( to change between exams, choose it from the first couple of lines in each file s)

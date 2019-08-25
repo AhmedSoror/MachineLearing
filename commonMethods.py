@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import csv
 from operator import itemgetter
+from sklearn.preprocessing import LabelEncoder
 
 
 # -------------------------------- Constants & Global Variables ----------------------------------------
@@ -87,6 +88,18 @@ def get_session_from_student(source_path, output_path, student_id):
         line = f'{student_id}, {line}'
         with open(f'{output_path}/session {session_id}.csv', 'a') as fd:
             fd.write(line)
+
+
+
+def encode(file_path):
+    df = pd.read_csv(file_path)
+    x = df.iloc[:, :].values
+    encoder = LabelEncoder()
+    x[:, 2] = encoder.fit_transform((x[:, 2]))
+    y = pd.DataFrame(x)
+    df.to_csv(r'test.csv', index=False)
+    df["activity"] = y[2]
+    df.to_csv(file_path)
 
 
 def collapse_sessions(output_path):

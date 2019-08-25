@@ -1,14 +1,9 @@
 import os
 
-
-# ---------------------------------------------- Constants ----------------------------------------------
-
 source_sessions_in_parent = "Data/Processes"
 features_string = "session_id,student_id,exercise,activity,start_time,end_time,idle_time,mouse_wheel," \
                   "mouse_wheel_click,mouse_click_left,mouse_click_right,mouse_movement,keystroke"
 sessions_csv_parent = "Data_Processed/Processes"
-
-# ---------------------------------------------- Methods ----------------------------------------------
 
 
 def insert_top(original_file, new_file, line):
@@ -29,7 +24,6 @@ def add_features():
     # print("Process Completed")
 
 
-# ---------------------------------------------- Main ----------------------------------------------
 def run():
     add_features()
 
