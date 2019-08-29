@@ -16,7 +16,7 @@ good indicators.
 
 log file has error :  student 62 didn't attend session 3 ( found 1 in the log) so flip it to 0 before start
 
-how to run:
+#how to run:
 
 1) run run.py
 
