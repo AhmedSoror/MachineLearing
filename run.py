@@ -2,7 +2,7 @@ import addingFeaturesNames
 import getSessionsPerStudent
 import sessionAverage
 import addFinalGrades
-import dataPrepared
+import dataPreparing
 
 
 def run():
@@ -10,7 +10,7 @@ def run():
     getSessionsPerStudent.run()
     sessionAverage.run()
     addFinalGrades.run()
-    dataPrepared.run()
+    dataPreparing.run()
     print('Data is ready')
 
 

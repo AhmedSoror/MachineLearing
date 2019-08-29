@@ -17,7 +17,6 @@ def init():
             fd.write(header+"\n")
 
 
-
 def encode(file_path):
     df = pd.read_csv(file_path)
     x = df.iloc[:, :].values

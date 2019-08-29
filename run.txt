@@ -10,9 +10,10 @@ how to run:
 2) getSessionsPerStudent : get a csv file for every student with session data
 3) sessionAverage : get average per session to complete missing data
 4) addFinalGrades : add final grade per session for each student.csv file in the processed data folder
-5) dataPrepared : get csv file per session to model it
+5) dataPreparing : get csv file per session to model it
 ---------------------------------------------------------------------------------
 
 Now all data are ready to model (in "output" )
 
-run files from predictions ( to change between exams, choose it from the first couple of lines in each file s)
+* run files from predictions ( to change between exams, choose it from the first couple of lines ix`n each file s)
+* to get the error in all predictions per exam run predicting.py

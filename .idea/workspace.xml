@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ea2ae16-9987-4bdf-a380-c95e32b96645" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Predictions/session 1.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Predictions/session 2 .ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Predictions/session 3.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Predictions/session 4.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Predictions/session 5.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Predictions/session 6.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Predictions/allSessions.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/predicting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/randomForest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addingFeaturesNames.py" beforeDir="false" afterPath="$PROJECT_DIR$/addingFeaturesNames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/commonMethods.py" beforeDir="false" afterPath="$PROJECT_DIR$/commonMethods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataPrepared.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataPrepared.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataPrepared.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataPreparing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jupyter Notebook" />
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -74,7 +66,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.creatingModel">
+  <component name="RunManager" selected="Python.predicting">
     <configuration name="addFinalGrades" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dataPreprocessing" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,7 +102,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataPrepared.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataPreparing.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -119,7 +111,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="getSessionsPerStudent" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="predicting" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dataPreprocessing" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -132,7 +124,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/getSessionsPerStudent.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/predicting.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,7 +133,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="sessionAverage" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="randomForest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dataPreprocessing" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -154,7 +146,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sessionAverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/randomForest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -187,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.predicting" />
+        <item itemvalue="Python.randomForest" />
         <item itemvalue="Python.creatingModel" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.addFinalGrades" />
-        <item itemvalue="Python.sessionAverage" />
-        <item itemvalue="Python.getSessionsPerStudent" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +210,11 @@
       <workItem from="1566301416572" duration="599000" />
       <workItem from="1566373802462" duration="638000" />
       <workItem from="1566377411662" duration="329000" />
-      <workItem from="1566713579042" duration="3678000" />
+      <workItem from="1566713579042" duration="4069000" />
+      <workItem from="1566721662919" duration="2607000" />
+      <workItem from="1566730520068" duration="611000" />
+      <workItem from="1566763053121" duration="736000" />
+      <workItem from="1566892236319" duration="6855000" />
     </task>
     <task id="LOCAL-00001" summary="Getting final grades and average final grades">
       <created>1566053516706</created>
@@ -307,6 +303,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MachineLearing$sessionAverage.coverage" NAME="sessionAverage Coverage Results" MODIFIED="1566078529606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MachineLearing$addFinalGrades.coverage" NAME="addFinalGrades Coverage Results" MODIFIED="1566078544805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MachineLearing$predicting.coverage" NAME="predicting Coverage Results" MODIFIED="1566897656812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MachineLearing$test.coverage" NAME="test Coverage Results" MODIFIED="1566289573832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/dataPreprocessing$addingFeatures.coverage" NAME="addingFeatures Coverage Results" MODIFIED="1565723220520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/dataPreprocessing$app.coverage" NAME="app Coverage Results" MODIFIED="1565741518532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -315,6 +312,7 @@
     <SUITE FILE_PATH="coverage/dataPreprocessing$sessionProcessing.coverage" NAME="sessionProcessing Coverage Results" MODIFIED="1565744016115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MachineLearing$session_average.coverage" NAME="session_average Coverage Results" MODIFIED="1566065424854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MachineLearing$creatingModel.coverage" NAME="creatingModel Coverage Results" MODIFIED="1566291865928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MachineLearing$randomForest.coverage" NAME="randomForest Coverage Results" MODIFIED="1566896223365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MachineLearing$sessionProcessing.coverage" NAME="sessionProcessing Coverage Results" MODIFIED="1566065406229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MachineLearing$addingFeatures.coverage" NAME="addingFeatures Coverage Results" MODIFIED="1566065401038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MachineLearing$getSessionsPerStudent.coverage" NAME="getSessionsPerStudent Coverage Results" MODIFIED="1566078508798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
