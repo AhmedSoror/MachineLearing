@@ -16,7 +16,7 @@ good indicators.
 
 log file has error :  student 62 didn't attend session 3 ( found 1 in the log) so flip it to 0 before start
 
-#how to run:
+# How to run:
 
 1) run run.py
 
@@ -29,7 +29,7 @@ log file has error :  student 62 didn't attend session 3 ( found 1 in the log) s
 5) dataPreparing : get csv file per session to model it
 ---------------------------------------------------------------------------------
 
-Now all data are ready to model (in "output" )
+# Now all data are ready to model (in "output" )
 
 * run files from predictions ( to change between exams, choose it from the first couple of lines ix`n each file s)
 * to get the error in all predictions per exam run predicting.py
